@@ -4,3 +4,115 @@
 *:after {
   box-sizing: border-box;
 }
+
+header {
+  font-family: 'Quicksand', sans-serif;
+  padding-bottom: 20px;
+}
+
+header #ceiling{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.siteName a {
+  font-size: 40px;
+}
+
+#tools a {
+  display: flex;
+  justify-content: end;
+  margin-right: 25px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.siteName a, #tools a {
+  list-style-type: none;
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  background-color: blue;
+  margin-right: 25px;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  font-family: 'Rubik', sans-serif;
+  padding: 0;
+}
+
+nav ul li {
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+}
+
+h1, h2, h3, #reviews, .upgrades {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+.description {
+  /*border-color: white;
+  border-style: solid;*/
+  padding-left: 10px;
+}
+
+.description p {
+  font-family: 'Poppins', sans-serif;
+  padding: -5px;
+}
+
+.description h3, .description p {
+  color: #2196F3;
+}
+
+#ownTodayBtn {
+  position: absolute;
+  border: none;
+  padding: 10px 20px;
+  background-color: #2196F3;
+  color: black;
+  font-family: 'Rubik', sans-serif;
+  font-size: 15px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+#reviews {
+  font-size: 15px;
+}
+
+.upgrades {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  background-color: white;
+  padding: 0;
+  text-align: center;
+}
+
+.upgradeImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+footer .copyright {
+  font-family: 'Rubik', sans-serif;
+}
