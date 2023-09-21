@@ -37,7 +37,7 @@ header #ceiling{
 }
 
 #tools a, nav {
-  margin-right: 25px;
+  margin-right: 10px;
 }
 
 nav {
@@ -54,7 +54,7 @@ nav ul li {
   padding: 1rem 1.25rem;
 }
 
-nav ul, #ownTodayBtn, footer .copyright {
+nav ul, .description button, footer .copyright {
   font-family: 'Rubik', sans-serif;
 }
 
@@ -66,32 +66,38 @@ h1 {
   font-size: 22px;
 }
 
+.banner {
+  padding-bottom: 20px;
+}
+
 .description {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  padding-left: 10px;
+  position: absolute;
+  left: 15px;
+  top: 195px;
+  max-width: fixed;
+  height: 205px;
+  padding: 10px;
+  background-color: rgba(248, 239, 239, .5);
 }
 
 .description h3, .description p {
-  color: #ff6600;
+  color: #ff3300;
 }
 
-#ownTodayBtn {
-  position: relative;
+.description button {
   border: none;
   padding: 10px 20px;
-  background-color: #ff6600;
+  background-color: #ff3300;
   color: black;
   font-size: 15px;
 }
 
 .delorean img {
-  position: absolute;
-  top: 0;
-  left: 100px;
-  width: 300px;
-  height: 200px;
+  display: block;
+  margin: 0 auto;
+  left: 200px;
+  width: 350px;
+  height: 175px;
 }
 
 h2 {
@@ -122,7 +128,7 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  background-color: #ff3300;
+  background-color: #FF8C00;
   border-style: solid;
   border-color: black;
   border-width: 2px;
@@ -137,7 +143,7 @@ h3 {
 @media only screen and (min-width: 960px) {
 
   body {
-    /*background-image: url("/images/site/small_check.jpg");*/
+    background-image: url("/images/site/small_check.jpg");
     margin: 20px 100px 20px 100px;
     border-color: #ff6600;
     border-style: solid;
@@ -146,13 +152,30 @@ h3 {
     padding: 20px 20px 0px 20px;
   }
 
-  nav, #tools a, .siteName a {
+  #tools a {
     margin: 0;
   }
 
   nav ul li {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  body, .grid-container, header, footer {
+    background-color: white;
+  }
+
+  header, .grid-container {
+    margin: -20px;
+  }
+
+  header, .grid-container, footer {
+    padding: 10px;
+  }
+
+  footer, nav {
+    margin-left: -20px;
+    margin-right: -20px;
   }
 
   .grid-container {
@@ -180,6 +203,10 @@ h3 {
     padding-bottom: 50px;
   }
 
+  .newFeatures, .reviews, h1 {
+    margin-left: 50px;
+  }
+
   h1 {
     font-size: 40px;
   }
@@ -188,11 +215,20 @@ h3 {
     font-size: 25px;
   }
 
+  .description {
+    left: 240px;
+    top: 225px;
+    bottom: 100px;
+    max-width: fixed;
+    height: 275px;
+    padding: 0px 10px 10px 10px;
+  }
+
   .description p {
     font-size: 20px;
   }
 
-  #ownTodayBtn {
+  .description button {
     padding: 20px 40px;
     font-size: 18px;
   }
@@ -202,7 +238,7 @@ h3 {
     margin-left: auto;
     margin-right: auto;
     left: 200px;
-    width: 750px;
+    width: 700px;
     height: 250px;
   }
 
