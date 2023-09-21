@@ -23,8 +23,6 @@ header #ceiling{
 #tools a {
   display: flex;
   justify-content: end;
-  margin-right: 25px;
-  padding: 0;
   text-transform: uppercase;
 }
 
@@ -34,16 +32,21 @@ header #ceiling{
   color: black;
 }
 
-nav {
-  background-color: blue;
+#tools a, nav ul, .description p, .upgrades {
+  padding: 0;
+}
+
+#tools a, nav {
   margin-right: 25px;
+}
+
+nav {
+  background-color: #ff0000;
 }
 
 nav ul {
   display: flex;
   list-style-type: none;
-  font-family: 'Rubik', sans-serif;
-  padding: 0;
 }
 
 nav ul li {
@@ -51,7 +54,11 @@ nav ul li {
   padding: 1rem 1.25rem;
 }
 
-h1, h2, h3, #reviews, .upgrades {
+nav ul, #ownTodayBtn, footer .copyright {
+  font-family: 'Rubik', sans-serif;
+}
+
+h1, h2, h3, .description p, .comments, .upgrades {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -60,28 +67,31 @@ h1 {
 }
 
 .description {
-  /*border-color: white;
-  border-style: solid;*/
+  position: relative;
+  width: 200px;
+  height: 200px;
   padding-left: 10px;
 }
 
-.description p {
-  font-family: 'Poppins', sans-serif;
-  padding: -5px;
-}
-
 .description h3, .description p {
-  color: #2196F3;
+  color: #ff6600;
 }
 
 #ownTodayBtn {
-  position: absolute;
+  position: relative;
   border: none;
   padding: 10px 20px;
-  background-color: #2196F3;
+  background-color: #ff6600;
   color: black;
-  font-family: 'Rubik', sans-serif;
   font-size: 15px;
+}
+
+.delorean img {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 300px;
+  height: 200px;
 }
 
 h2 {
@@ -92,8 +102,12 @@ h3 {
   font-size: 18px;
 }
 
-#reviews {
+.comments {
   font-size: 15px;
+}
+
+.comments li {
+  padding: 10px;
 }
 
 .upgrades {
@@ -101,7 +115,6 @@ h3 {
   grid-template-columns: auto auto;
   gap: 10px;
   background-color: white;
-  padding: 0;
   text-align: center;
 }
 
@@ -109,10 +122,88 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  background-color: #2196F3;
+  background-color: #ff3300;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
   padding: 10px;
 }
 
-footer .copyright {
-  font-family: 'Rubik', sans-serif;
+.upgradeImg img {
+  width: 50px;
+  height: 50px;
+}
+
+@media only screen and (min-width: 960px) {
+
+  body {
+    /*background-image: url("/images/site/small_check.jpg");*/
+    margin: 20px 100px 20px 100px;
+    border-color: #ff6600;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    padding: 20px 20px 0px 20px;
+  }
+
+  nav, #tools a, .siteName a {
+    margin: 0;
+  }
+
+  nav ul li {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .grid-container {
+    display: grid;
+    gap: 30px;
+  }
+
+  .banner {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+  
+  .newFeatures {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .reviews {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .newFeatures, .reviews {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h2, h3 {
+    font-size: 25px;
+  }
+
+  .description p {
+    font-size: 20px;
+  }
+
+  #ownTodayBtn {
+    padding: 20px 40px;
+    font-size: 18px;
+  }
+
+  .delorean img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    left: 200px;
+    width: 750px;
+    height: 250px;
+  }
+
 }
