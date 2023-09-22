@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+#wrapper {
+  background-color: white;
+  max-width: 960px;
+  margin: auto;
+}
+
 header {
   font-family: 'Quicksand', sans-serif;
   padding-bottom: 20px;
@@ -51,7 +57,7 @@ nav ul {
 
 nav ul li {
   text-decoration: none;
-  padding: 1rem 1.25rem;
+  padding: 1rem 0.7rem;
 }
 
 nav ul, .description button, footer .copyright {
@@ -144,16 +150,22 @@ h3 {
 
   body {
     background-image: url("/images/site/small_check.jpg");
-    margin: 20px 100px 20px 100px;
+  }
+
+  #wrapper {
     border-color: #ff6600;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
-    padding: 20px 20px 0px 20px;
   }
 
   #tools a {
     margin: 0;
+  }
+
+  nav {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   nav ul li {
@@ -165,17 +177,8 @@ h3 {
     background-color: white;
   }
 
-  header, .grid-container {
-    margin: -20px;
-  }
-
   header, .grid-container, footer {
     padding: 10px;
-  }
-
-  footer, nav {
-    margin-left: -20px;
-    margin-right: -20px;
   }
 
   .grid-container {
@@ -216,8 +219,8 @@ h3 {
   }
 
   .description {
-    left: 240px;
-    top: 225px;
+    left: 275px;
+    top: 260px;
     bottom: 100px;
     max-width: fixed;
     height: 275px;
