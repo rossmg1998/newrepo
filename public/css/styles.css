@@ -80,13 +80,12 @@ h1 {
   position: absolute;
   left: 15px;
   top: 195px;
-  max-width: fixed;
   height: 205px;
   padding: 10px;
   background-color: rgba(248, 239, 239, .5);
 }
 
-.description h3, .description p {
+.description {
   color: #ff3300;
 }
 
@@ -108,10 +107,6 @@ h1 {
 
 h2 {
   font-size: 20px;
-}
-
-h3 {
-  font-size: 18px;
 }
 
 .comments {
@@ -214,7 +209,7 @@ h3 {
     font-size: 40px;
   }
 
-  h2, h3 {
+  h2 {
     font-size: 25px;
   }
 
@@ -222,7 +217,6 @@ h3 {
     left: 275px;
     top: 260px;
     bottom: 100px;
-    max-width: fixed;
     height: 275px;
     padding: 0px 10px 10px 10px;
   }
