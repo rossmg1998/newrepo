@@ -52,12 +52,16 @@ nav {
 
 nav ul {
   display: flex;
-  list-style-type: none;
 }
 
 nav ul li {
-  text-decoration: none;
+  list-style-type: none;
   padding: 1rem 0.7rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
 }
 
 nav ul, .description button, footer .copyright {
@@ -139,6 +143,50 @@ h2 {
 .upgradeImg img {
   width: 50px;
   height: 50px;
+}
+
+#inv-display ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.vehicle {
+  padding-right: 20px;
+  padding-bottom: 15px;
+
+}
+
+#inv-display li {
+  background-color: #FF8C00;
+  list-style-type: none;
+  border-color: #ff3300;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#inv-display img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#inv-display a {
+  text-decoration: none;
+  color: black;
+}
+
+.namePrice {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+hr {
+  height: 2px;
+  background-color: black;
+  border: none;
 }
 
 @media only screen and (min-width: 960px) {
@@ -237,6 +285,16 @@ h2 {
     left: 200px;
     width: 700px;
     height: 250px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-right: 20px;
+  }
+
+  #inv-display li {
+    height: 350px;
   }
 
 }
