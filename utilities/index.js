@@ -32,7 +32,9 @@ Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
     grid = '<ul id="inv-display">'
+    grid += '<div class="grid-container">'
     data.forEach(vehicle => { 
+      grid += '<div class="vehicle">'
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
@@ -50,7 +52,9 @@ Util.buildClassificationGrid = async function(data){
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
+      grid += '</div>'
     })
+    grid += '</div>'
     grid += '</ul>'
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
