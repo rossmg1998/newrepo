@@ -28,39 +28,79 @@ Util.getNav = async function (req, res, next) {
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
-Util.buildClassificationGrid = async function(data){
-  let grid
-  if(data.length > 0){
-    grid = '<ul id="inv-display">'
-    grid += '<div class="grid-container">'
-    data.forEach(vehicle => { 
-      grid += '<div class="vehicle">'
-      grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
-      grid += '<div class="namePrice">'
-      grid += '<hr />'
-      grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-      grid += '</h2>'
-      grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += '</div>'
-      grid += '</li>'
-      grid += '</div>'
-    })
-    grid += '</div>'
-    grid += '</ul>'
-  } else { 
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+Util.buildClassificationGrid = async function (data) {
+  if (data.length === 0) {
+   return '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
-  return grid
-}
+
+  const grid = data.map(vehicle => {
+   const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_thumbnail,
+    inv_price,
+   } = vehicle;
+
+   return `
+    <div class="vehicle">
+      <li>
+        <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
+          <img src="${inv_thumbnail}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
+        </a>
+        <div class="namePrice">
+          <hr />
+          <h2>
+            <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
+              ${inv_make} ${inv_model}
+            </a>
+          </h2>
+          <span>$${new Intl.NumberFormat('en-US').format(inv_price)}</span>
+        </div>
+      </li>
+    </div>
+    `;
+  });
+
+  return '<ul id="inv-display">' + '<div class="grid-container">' + grid.join('') + '</div>' + '</ul>';
+};
+
+
+/* **************************************
+* Build the details view HTML
+* ************************************ */
+Util.buildDetailedGrid = async function (data) {
+  if (data.length === 0) {
+   return '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+  }
+
+  const grid = data.map(vehicle => {
+   const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_image,
+    inv_price,
+   } = vehicle;
+
+   return `
+    <div class="vehicle">
+      <li>
+        <div class="vehicle-image">
+          <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
+            <img src="${inv_image}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
+          </a>
+        </div>
+        <div>
+          <h2>${inv_make} ${inv_model}</h2>
+        </div>
+      </li>
+    </div>
+    `;
+  });
+
+  return '<ul id="inv-display">' + grid.join('') + '</ul>';
+};
 
 /* ****************************************
  * Middleware For Handling Errors
