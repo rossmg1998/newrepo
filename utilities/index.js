@@ -79,20 +79,28 @@ Util.buildDetailedGrid = async function (data) {
     inv_id,
     inv_make,
     inv_model,
+    inv_year,
+    inv_description,
     inv_image,
     inv_price,
+    inv_miles,
+    inv_color,
    } = vehicle;
 
    return `
-    <div class="vehicle">
+    <div class="vehicle-content">
       <li>
         <div class="vehicle-image">
           <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
             <img src="${inv_image}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
           </a>
         </div>
-        <div>
-          <h2>${inv_make} ${inv_model}</h2>
+        <div class="vehicle-description">
+          <h2>${inv_make} ${inv_model} ${inv_year}</h2>
+          <p><b>Price: <span>$${new Intl.NumberFormat('en-US').format(inv_price)}</span></b></p>
+          <p><b>Description:</b> ${inv_description}</p>
+          <p><b>Color:</b> ${inv_color}</p>
+          <p><b>Miles:</b> <span>${new Intl.NumberFormat('en-US').format(inv_miles)}</span></p>
         </div>
       </li>
     </div>

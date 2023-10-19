@@ -154,7 +154,6 @@ h2 {
 .vehicle {
   padding-right: 40px;
   padding-bottom: 15px;
-
 }
 
 #inv-display li {
@@ -187,6 +186,10 @@ hr {
   height: 2px;
   background-color: black;
   border: none;
+}
+
+.vehicle-image img {
+  max-width: 100%;
 }
 
 @media only screen and (min-width: 960px) {
@@ -293,8 +296,23 @@ hr {
     padding-right: 20px;
   }
 
-  #inv-display li {
-    height: 350px;
+  #inv-display {
+    margin-right: 40px;
+    margin-bottom: 15px;
+  }
+
+  .vehicle-content li {
+    display: flex; 
+    align-items: center; 
+  }
+
+  .vehicle-image {
+    flex: 0 0 auto; 
+    margin-right: 20px; 
+  }
+
+  .vehicle-image img {
+    min-width: 100%;
   }
 
 }

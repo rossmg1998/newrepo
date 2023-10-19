@@ -34,7 +34,7 @@ invCont.buildDetailedView = async function (req, res, next) {
   console.log(data[0])
 
   res.render("./inventory/classification", {
-    title: inv_make + ' ' + inv_model + ' ' + inv_year,
+    title: inv_make + ' ' + inv_model,
     nav,
     grid,
   })
