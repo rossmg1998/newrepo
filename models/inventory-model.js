@@ -27,10 +27,10 @@ async function getInventoryByClassificationId(classification_id) {
 
 /* ***************************
  *  Get all inventory data
- * ************************** */
+ * ************************** 
 async function getInventory(){
   return await pool.query("SELECT * FROM public.inventory ORDER BY inv_make")
-}
+} */
 
 /* ***************************
  *  Get all inventory items and inv_make by inv_id

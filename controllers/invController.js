@@ -30,7 +30,7 @@ invCont.buildDetailedView = async function (req, res, next) {
 
   const inv_make = data[0].inv_make
   const inv_model = data[0].inv_model
-  const inv_year = data[0].inv_year
+  // const inv_year = data[0].inv_year
   console.log(data[0])
 
   res.render("./inventory/classification", {
