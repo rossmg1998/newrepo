@@ -62,7 +62,7 @@ Util.buildClassificationGrid = async function (data) {
     `;
   });
 
-  return '<ul id="inv-display">' + '<div class="grid-container">' + grid.join('') + '</div>' + '</ul>';
+  return '<ul id="inv-display">' + grid.join('') + '</ul>';
 };
 
 

@@ -290,15 +290,15 @@ hr {
     height: 250px;
   }
 
-  .grid-container {
+  #inv-display {
     display: grid;
     grid-template-columns: auto auto auto;
-    padding-right: 20px;
+    gap: 30px;
+    margin-bottom: 15px;
   }
 
-  #inv-display {
-    margin-right: 40px;
-    margin-bottom: 15px;
+  #inv-display ul {
+    padding-right: 20px;
   }
 
   .vehicle-content li {
