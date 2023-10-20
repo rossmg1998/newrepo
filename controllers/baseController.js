@@ -6,9 +6,11 @@ baseController.buildHome = async function(req, res){
   res.render("index", {title: "Home", nav})
 }
 
-// baseController.buildHome = async function(req, res){
-//   const nav = await utilities.getNav()
-//   throw {status: 500, message: "Internal Server Error"}
-// }
+// Build the 500 view
+baseController.build500 = async function (req, res) {
+
+	// Throw 500 error
+	throw new Error("Intentional Error");
+};
 
 module.exports = baseController
