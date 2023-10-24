@@ -35,12 +35,12 @@ async function getInventory(){
 /* ***************************
  *  Get all inventory items and inv_make by inv_id
  * ************************** */
-async function getDetailedView(classification_id) {
+async function getDetailedView(inv_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory AS i 
       WHERE i.inv_id = $1`,
-      [classification_id]
+      [inv_id]
     )
     return data.rows
   } catch (error) {
