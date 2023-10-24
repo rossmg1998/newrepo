@@ -42,9 +42,9 @@ async function getDetailedView(inv_id) {
       WHERE i.inv_id = $1`,
       [inv_id]
     )
-    return data.rows[0]
+    return data.rows
   } catch (error) {
-    console.error("getinventoryitembyid error " + error)
+    console.error("getclassificationsbyid error " + error)
   }
 }
 
