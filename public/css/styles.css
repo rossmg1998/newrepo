@@ -51,12 +51,12 @@ nav {
 }
 
 nav ul {
-  display: flex;
+  display: block;
 }
 
 nav ul li {
   list-style-type: none;
-  padding: 1rem 0.7rem;
+  padding: 0.25rem 0.7rem;
 }
 
 nav a {
@@ -83,7 +83,7 @@ h1 {
 .description {
   position: absolute;
   left: 15px;
-  top: 195px;
+  top: 325px;
   height: 205px;
   padding: 10px;
   background-color: rgba(248, 239, 239, .5);
@@ -190,6 +190,26 @@ hr {
 
 .vehicle-image img {
   max-width: 100%;
+}
+
+@media only screen and (min-width: 475px) {
+
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  nav ul li {
+    list-style-type: none;
+    padding: 1rem 0.7rem;
+  }
+
+  .description {
+    position: absolute;
+    left: 15px;
+    top: 195px;
+  }
+
 }
 
 @media only screen and (min-width: 960px) {
