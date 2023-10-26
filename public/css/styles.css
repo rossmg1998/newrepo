@@ -80,6 +80,12 @@ h1 {
   padding-bottom: 20px;
 }
 
+/* .notice li {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+} */
+
 .description {
   position: absolute;
   left: 15px;
