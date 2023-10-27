@@ -43,7 +43,6 @@ Util.buildClassificationGrid = async function (data) {
    } = vehicle;
 
    return `
-    <div class="vehicle">
       <li>
         <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
           <img src="${inv_thumbnail}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
@@ -58,7 +57,6 @@ Util.buildClassificationGrid = async function (data) {
           <span>$${new Intl.NumberFormat('en-US').format(inv_price)}</span>
         </div>
       </li>
-    </div>
     `;
   });
 
@@ -88,7 +86,6 @@ Util.buildDetailedGrid = async function (data) {
    } = vehicle;
 
    return `
-    <div class="vehicle-content">
       <li>
         <div class="vehicle-image">
           <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
@@ -103,7 +100,6 @@ Util.buildDetailedGrid = async function (data) {
           <p><b>Miles:</b> <span>${new Intl.NumberFormat('en-US').format(inv_miles)}</span></p>
         </div>
       </li>
-    </div>
     `;
   });
 

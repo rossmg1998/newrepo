@@ -151,15 +151,15 @@ h2 {
   height: 50px;
 }
 
+#inv-display {
+  padding-right: 40px;
+  padding-bottom: 15px;
+}
+
 #inv-display ul {
   display: block;
   margin: 0;
   padding: 0;
-}
-
-.vehicle {
-  padding-right: 40px;
-  padding-bottom: 15px;
 }
 
 #inv-display li {
@@ -321,13 +321,14 @@ hr {
     grid-template-columns: auto auto auto;
     gap: 30px;
     margin-bottom: 15px;
-  }
-
-  #inv-display ul {
     padding-right: 20px;
   }
 
-  .vehicle-content li {
+  /* #inv-display ul {
+    padding-right: 20px;
+  } */
+
+  #inv-display li {
     display: flex; 
     align-items: center; 
   }
