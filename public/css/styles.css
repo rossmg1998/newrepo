@@ -324,11 +324,12 @@ hr {
     padding-right: 20px;
   }
 
-  /* #inv-display ul {
-    padding-right: 20px;
-  } */
+  #inv-display ul {
+    display: flex; 
+    align-items: center; 
+  }
 
-  #inv-display li {
+  .vehicle-content {
     display: flex; 
     align-items: center; 
   }
