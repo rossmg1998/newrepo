@@ -68,7 +68,7 @@ nav ul, .description button, footer .copyright {
   font-family: 'Rubik', sans-serif;
 }
 
-h1, h2, h3, p, .description p, .comments, .upgrades {
+h1, h2, h3, p, .description p, .comments, .upgrades, .login {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -199,6 +199,64 @@ hr {
   max-width: 100%;
 }
 
+.form-container {
+  margin: 0;
+  text-align: center;
+}
+
+.form-container button {
+  margin-top: 10px;
+}
+
+form {
+  background-color: #FF8C00;
+  max-width: 80%;
+  margin: 20px;
+  border-color: #ff3300;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.login {
+  display: block; 
+}
+
+.login label, .login input, .login p, .login a {
+  font-size: 20px;
+}
+
+.login label {
+  font-weight: bold;
+}
+
+.login input {
+  margin-bottom: 20px;
+  border-color: #ff3300;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  padding: 5px;
+  max-width: fit-content;
+}
+
+.login button {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  padding: 10px 40px 10px 40px;
+}
+
+.login p {
+  text-align: center;
+}
+
+.login a {
+  color: black;
+}
+
 @media only screen and (min-width: 475px) {
 
   nav ul {
@@ -215,6 +273,11 @@ hr {
     position: absolute;
     left: 15px;
     top: 195px;
+  }
+
+  form {
+    max-width: 70%;
+    margin: 0 auto;
   }
 
 }
@@ -342,6 +405,11 @@ hr {
 
   .vehicle-image img {
     min-width: 100%;
+  }
+
+  form {
+    max-width: 40%;
+    margin: 0 auto;
   }
 
 }
