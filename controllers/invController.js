@@ -57,8 +57,8 @@ invCont.buildManagement = async function (req, res, next) {
  * ************************** */
 invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("./inventory/add-classification", {
-    title: "Add New Classification",
+  res.render("inventory/add-classification", {
+    title: "New Classification",
     nav,
     errors: null,
   })
@@ -67,40 +67,45 @@ invCont.buildAddClassification = async function (req, res, next) {
 /* ***************************
  *  Build add inventory view
  * ************************** */
-invCont.buildAddInventory = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("./inventory/add-inventory", {
-    title: "Add New Inventory",
-    nav,
-    errors: null,
-  })
-}
+// invCont.buildAddInventory = async function (req, res, next) {
+//   let nav = await utilities.getNav()
+//   res.render("./inventory/add-inventory", {
+//     title: "New Inventory",
+//     nav,
+//     errors: null,
+//   })
+// }
 
 /* ****************************************
 *  Process Classification
 * *************************************** */
 invCont.addClassification = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  const { classification_name } = req.body
+  const { classification_name } = req.body;
   
-  const classResult = await invModel.addClassification(
+   const classResult = await invModel.addClassification(
     classification_name
-  )
+   )
 
   if (classResult) {
     req.flash(
       "notice",
       `Congratulations, you\'ve successfully added ${classification_name}.`
     )
+    let nav = await utilities.getNav()
     res.status(201).render("inventory/add-classification", {
-      title: "Add New Classification",
+      title: "New Classification",
       nav,
+      errors: null,
     })
   } else {
-    req.flash("notice", "Sorry, you failed to add new classification.")
+    req.flash(
+      "notice", 
+      `Sorry, add new classification failed.`
+    )
     res.status(501).render("inventory/add-classification", {
-      title: "Add New Classification",
+      title: "New Classification",
       nav,
+      errors: null,
     })
   }
 }
