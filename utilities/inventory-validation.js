@@ -12,8 +12,8 @@ validate.addClassificationRules = () => {
       body("classification_name")
       .trim()
       .isLength({ min: 1 })
+      .custom(value => /^[a-zA-Z0-9]+$/.test(value))
       .withMessage("No spaces or special characters are allowed in the classification name.") // on error this message is sent.
-      .custom(value => !/\s/.test(value))
       .custom(async (classification_name) => {
         const classificationExists = await inventoryModel.checkExistingClassification(classification_name)
         if (classificationExists){
