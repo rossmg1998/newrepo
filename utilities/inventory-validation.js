@@ -1,4 +1,5 @@
 const utilities = require(".")
+const invCont = require("../controllers/invController")
 const inventoryModel = require("../models/inventory-model")
 const { body, validationResult } = require("express-validator")
 const validate = {}
@@ -105,10 +106,12 @@ validate.checkInventoryData = async (req, res, next) => {
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
+    let options = await invCont.buildOptions()
     res.render("inventory/add-inventory", {
       errors,
       title: "New Inventory",
       nav,
+      options,
       inv_make,
       inv_model,
       inv_year,

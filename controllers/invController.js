@@ -45,7 +45,9 @@ invCont.buildDetailedView = async function (req, res, next) {
  * ************************** */
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
+  // const options = await utilities.buildOptions()
   res.render("./inventory/management", {
+    // options,
     title: "Management",
     nav,
     errors: null,
@@ -120,7 +122,7 @@ invCont.buildAddInventory = async function (req, res, next) {
     title: "New Inventory",
     nav,
     errors: null,
-    options
+    options,
   })
 }
 
