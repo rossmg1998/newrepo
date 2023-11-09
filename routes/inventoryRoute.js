@@ -18,7 +18,7 @@ router.get("/", Utilities.handleErrors(invController.buildManagement));
 router.get("/add-classification", Utilities.handleErrors(invController.buildAddClassification));
 
 // Route to add inventory view
-// router.get("./add-inventory", Utilities.handleErrors(invController.buildAddInventory));
+router.get("/add-inventory", Utilities.handleErrors(invController.buildAddInventory));
 
 // Process the classification data
 router.post(
@@ -29,11 +29,11 @@ router.post(
 )
 
 // Process the inventory data
-// router.post(
-//     "/add-inventory",
-//     invValidate.addInventoryRules(),
-//     invValidate.checkInventoryData,
-//     Utilities.handleErrors(invController.addInventory)
-// )
+router.post(
+    "/add-inventory",
+    invValidate.addInventoryRules(),
+    invValidate.checkInventoryData,
+    Utilities.handleErrors(invController.addInventory)
+)
 
 module.exports = router;

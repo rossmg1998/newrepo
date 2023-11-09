@@ -64,18 +64,6 @@ invCont.buildAddClassification = async function (req, res, next) {
   })
 }
 
-/* ***************************
- *  Build add inventory view
- * ************************** */
-// invCont.buildAddInventory = async function (req, res, next) {
-//   let nav = await utilities.getNav()
-//   res.render("./inventory/add-inventory", {
-//     title: "New Inventory",
-//     nav,
-//     errors: null,
-//   })
-// }
-
 /* ****************************************
 *  Process Classification
 * *************************************** */
@@ -104,6 +92,82 @@ invCont.addClassification = async function (req, res, next) {
     )
     res.status(501).render("inventory/add-classification", {
       title: "New Classification",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* *****************************
+ *  Build options for inventory
+ * **************************** */
+invCont.buildOptions = async function (req, res, next) {
+  let data = await invModel.getClassifications();
+  let options = ""
+  data.rows.forEach((row) => {
+    options += `<option value="${row.classification_id}">${row.classification_name}</option>`
+  })
+  return options
+}
+
+/* ***************************
+ *  Build add inventory view
+ * ************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let options = await invCont.buildOptions()
+  res.render("./inventory/add-inventory", {
+    title: "New Inventory",
+    nav,
+    errors: null,
+    options
+  })
+}
+
+/* ****************************************
+*  Process Inventory
+* *************************************** */
+invCont.addInventory = async function (req, res, next) {
+  const { 
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  
+   const classResult = await invModel.addInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+   )
+
+  if (classResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve successfully added ${inv_make}.`
+    )
+    let nav = await utilities.getNav()
+    res.status(201).render("inventory/add-inventory", {
+      title: "New Inventory",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash(
+      "notice", 
+      `Sorry, add new inventory failed.`
+    )
+    res.status(501).render("inventory/add-inventory", {
+      title: "New Inventory",
       nav,
       errors: null,
     })
