@@ -231,7 +231,7 @@ form {
   font-weight: bold;
 }
 
-.login input {
+.login input, .login textarea {
   margin-bottom: 20px;
   border-color: #ff3300;
   border-style: solid;
@@ -268,6 +268,11 @@ input:invalid:focus {
 
 .login a {
   color: black;
+}
+
+.login textarea {
+  width: 100%;
+  resize: none;
 }
 
 .management {
