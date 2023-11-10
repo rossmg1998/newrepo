@@ -45,6 +45,7 @@ async function getDetailedView(inv_id) {
     return data.rows
   } catch (error) {
     console.error("getinventoryitemsbyid error " + error)
+    throw error;
   }
 }
 
@@ -85,4 +86,17 @@ async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailedView, addClassification, checkExistingClassification, addInventory}
+/* ************************************
+ *   Check for existing inventory
+ * *********************************** */
+// async function checkExistingInventory(inv_make){
+//   try {
+//     const sql = "SELECT * FROM inventory WHERE inv_make = $1"
+//     const inventory = await pool.query(sql, [inv_make])
+//     return inventory.rowCount
+//   } catch (error) {
+//     return error.message
+//   }
+// }
+
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailedView, addClassification, checkExistingClassification, addInventory } // checkExistingInventory

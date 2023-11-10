@@ -25,6 +25,26 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
+/* *****************************
+ *  Build options for inventory
+ * **************************** */
+Util.buildOptions = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let options = '<select name="classification_id" id="classification_id">'
+  options += "<option>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    options += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null && row.classification_id == classification_id
+    ) {
+      options += " selected "
+    }
+    options += ">" + row.classification_name + "</option>"
+  })
+  options += "</select>"
+  return options
+}
+
 /* **************************************
 * Build the classification view HTML
 * ************************************ */

@@ -45,9 +45,7 @@ invCont.buildDetailedView = async function (req, res, next) {
  * ************************** */
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
-  // const options = await utilities.buildOptions()
   res.render("./inventory/management", {
-    // options,
     title: "Management",
     nav,
     errors: null,
@@ -70,18 +68,15 @@ invCont.buildAddClassification = async function (req, res, next) {
 *  Process Classification
 * *************************************** */
 invCont.addClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
   const { classification_name } = req.body;
-  
-   const classResult = await invModel.addClassification(
-    classification_name
-   )
+  const classResult = await invModel.addClassification(classification_name)
 
   if (classResult) {
     req.flash(
       "notice",
       `Congratulations, you\'ve successfully added ${classification_name}.`
     )
-    let nav = await utilities.getNav()
     res.status(201).render("inventory/add-classification", {
       title: "New Classification",
       nav,
@@ -100,29 +95,17 @@ invCont.addClassification = async function (req, res, next) {
   }
 }
 
-/* *****************************
- *  Build options for inventory
- * **************************** */
-invCont.buildOptions = async function (req, res, next) {
-  let data = await invModel.getClassifications();
-  let options = ""
-  data.rows.forEach((row) => {
-    options += `<option value="${row.classification_id}">${row.classification_name}</option>`
-  })
-  return options
-}
-
 /* ***************************
  *  Build add inventory view
  * ************************** */
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  let options = await invCont.buildOptions()
+  let options = await utilities.buildOptions()
   res.render("./inventory/add-inventory", {
     title: "New Inventory",
     nav,
-    errors: null,
     options,
+    errors: null,
   })
 }
 
@@ -130,6 +113,8 @@ invCont.buildAddInventory = async function (req, res, next) {
 *  Process Inventory
 * *************************************** */
 invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let options = await utilities.buildOptions()
   const { 
     inv_make,
     inv_model,
@@ -138,7 +123,7 @@ invCont.addInventory = async function (req, res, next) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id,
+    classification_id
   } = req.body
   
    const classResult = await invModel.addInventory(
@@ -149,7 +134,7 @@ invCont.addInventory = async function (req, res, next) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id,
+    classification_id
    )
 
   if (classResult) {
@@ -157,10 +142,10 @@ invCont.addInventory = async function (req, res, next) {
       "notice",
       `Congratulations, you\'ve successfully added ${inv_make}.`
     )
-    let nav = await utilities.getNav()
     res.status(201).render("inventory/add-inventory", {
       title: "New Inventory",
       nav,
+      options,
       errors: null,
     })
   } else {
@@ -171,6 +156,7 @@ invCont.addInventory = async function (req, res, next) {
     res.status(501).render("inventory/add-inventory", {
       title: "New Inventory",
       nav,
+      options,
       errors: null,
     })
   }

@@ -12,8 +12,10 @@ validate.addClassificationRules = () => {
         // classification_name is required and must be string
       body("classification_name")
       .trim()
+      .matches(/^[a-zA-Z0-9]+$/)
+      // .custom(value => /^[a-zA-Z0-9]+$/.test(value))
+      .withMessage("Please provide a classification name.") // on error this message is sent.
       .isLength({ min: 1 })
-      .custom(value => /^[a-zA-Z0-9]+$/.test(value))
       .withMessage("No spaces or special characters are allowed in the classification name.") // on error this message is sent.
       .custom(async (classification_name) => {
         const classificationExists = await inventoryModel.checkExistingClassification(classification_name)
@@ -52,18 +54,27 @@ validate.addInventoryRules = () => {
     body("inv_make")
     .trim()
     .isLength({ min: 3 })
-    .custom(value => /^[a-zA-Z0-9]+$/.test(value))
+    // .matches(/^[a-zA-Z0-9]+$/)
+    // .custom(value => /^[a-zA-Z0-9]+$/.test(value))
     .withMessage("Please provide a make."), // on error this message is sent.
+    // .custom(async (inv_make) => {
+    //   const inventoryExists = await inventoryModel.checkExistingInventory(inv_make)
+    //   if (inventoryExists){
+    //     throw new Error("Inventory exists.")
+    //   }
+    // }),
 
     body("inv_model")
     .trim()
     .isLength({ min: 3 })
-    .custom(value => /^[a-zA-Z0-9]+$/.test(value))
+    // .matches(/^[a-zA-Z0-9]+$/)
+    // .custom(value => /^[a-zA-Z0-9]+$/.test(value))
     .withMessage("Please provide a model."), // on error this message is sent.
 
     body("inv_year")
     .trim()
     .isLength({ max: 4 })
+    .isNumeric()
     .withMessage("Please provide a year."), // on error this message is sent.
 
     body("inv_description")
@@ -71,20 +82,37 @@ validate.addInventoryRules = () => {
     .isLength({ min: 1 })
     .withMessage("Please provide a description."), // on error this message is sent.
 
+    body("inv_image")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Please provide an image.")
+    .matches(".*\\.(jpg|jpeg|png|webp)$")
+    .withMessage("Please provide a valid Image (ending in: .jpg, .jpeg, .png, or .webp)"),
+
+    body("inv_thumbnail")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Please provide a thumbnail.")
+    .matches(".*\\.(jpg|jpeg|png|webp)$")
+    .withMessage("Please provide a valid Image (ending in: .jpg, .jpeg, .png, or .webp)"),
+    
     body("inv_price")
     .trim()
     .isLength({ min: 1 })
+    // .isNumeric()
     .withMessage("Please provide a price."), // on error this message is sent.
 
     body("inv_miles")
     .trim()
     .isLength({ min: 1 })
+    // .isNumeric()
     .withMessage("Please provide a mile count."), // on error this message is sent.
 
     body("inv_color")
     .trim()
     .isLength({ min: 3 })
-    .custom(value => /^[a-zA-Z0-9]+$/.test(value))
+    // .matches(/^[a-zA-Z0-9]+$/)
+    // .custom(value => /^[a-zA-Z0-9]+$/.test(value))
     .withMessage("Please provide a color."), // on error this message is sent.
   ]
 }
@@ -101,12 +129,13 @@ validate.checkInventoryData = async (req, res, next) => {
     inv_price,
     inv_miles,
     inv_color,
+    classification_id
   } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    let options = await invCont.buildOptions()
+    let options = await utilities.buildOptions()
     res.render("inventory/add-inventory", {
       errors,
       title: "New Inventory",
@@ -119,6 +148,7 @@ validate.checkInventoryData = async (req, res, next) => {
       inv_price,
       inv_miles,
       inv_color,
+      classification_id,
     })
     return
   }
