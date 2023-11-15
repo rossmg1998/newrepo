@@ -6,18 +6,6 @@ const bcrypt = require("bcryptjs")
 const accountModel = require("../models/account-model")
 const utilities = require("../utilities/")
 
-/* *******************************
-*  Build account management view
-* ****************************** */
-async function buildAccount(req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("./account/account-management", {
-    title: "Account Management",
-    nav,
-    errors: null,
-  })
-}
-
 /* ****************************************
 *  Deliver login view
 * *************************************** */
@@ -88,6 +76,18 @@ async function registerAccount(req, res) {
   }
 }
 
+/* *******************************
+*  Build account management view
+* ****************************** */
+async function buildAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/account", {
+    title: "Account",
+    nav,
+    errors: null,
+  })
+}
+
 /* ****************************************
  *  Process login request
  * ************************************ */
@@ -117,4 +117,4 @@ async function accountLogin(req, res) {
   }
  }
 
-module.exports = { buildAccount, buildLogin, buildRegister, registerAccount, accountLogin }
+module.exports = { buildLogin, buildRegister, registerAccount, buildAccount, accountLogin }
