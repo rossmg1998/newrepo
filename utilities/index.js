@@ -1,8 +1,8 @@
-const invModel = require("../models/inventory-model")
-const Util = {}
-
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+
+const invModel = require("../models/inventory-model")
+const Util = {}
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -134,13 +134,6 @@ Util.buildDetailedGrid = async function (data) {
 };
 
 /* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-/* ****************************************
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
@@ -162,5 +155,12 @@ Util.checkJWTToken = (req, res, next) => {
    next()
   }
  }
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 module.exports = Util

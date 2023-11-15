@@ -11,8 +11,8 @@ const utilities = require("../utilities/")
 * ****************************** */
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav()
-  res.render("/account", {
-    title: "Account",
+  res.render("./account/account-management", {
+    title: "Account Management",
     nav,
     errors: null,
   })

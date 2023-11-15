@@ -27,7 +27,7 @@ router.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLogData,
-    utilities.handleErrors(accountController.accountLogin)
+    Utilities.handleErrors(accountController.accountLogin)
     // (req, res) => {
     //   res.status(200).send('login process')
     // }
