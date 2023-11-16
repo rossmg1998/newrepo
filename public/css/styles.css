@@ -242,7 +242,7 @@ form {
 }
 
 input:valid {
-  background-color: green;
+  background-color: lawngreen;
 }
 
 input:invalid:focus {
