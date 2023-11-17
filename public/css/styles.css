@@ -276,7 +276,17 @@ input:invalid:focus {
 }
 
 .management {
-  margin-left: 75px;
+  margin: 40px;
+  padding: 10px;
+}
+
+.management p {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.management table {
+  padding-top: 20px;
 }
 
 @media only screen and (min-width: 475px) {
