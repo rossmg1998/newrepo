@@ -8,10 +8,10 @@
    </ul>
   <% } %>
 
-<form action="/inv/add-inventory" method="post">
+  <form action="/inv/update" method="post">
     <div class="login">
         <label for="classification_id">Choose a classification:</label><br>
-        <%- locals.options %>
+        <%- classificationSelect %>
         <!-- <select name="classification_id" id="classification_id"></select> -->
     </div>
     <div class="login">
@@ -59,7 +59,10 @@
         value="<%= locals.inv_color %>" pattern="^[a-zA-Z0-9]+$"><br>
     </div>
     <div class="button">
-        <button type="submit">Add Inventory</button>
+        <button type="submit" disabled>Update Vehicle</button>
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
     </div>
 </form>
 
