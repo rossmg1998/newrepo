@@ -289,6 +289,26 @@ input:invalid:focus {
   padding-top: 20px;
 }
 
+#inventoryDisplay {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  margin: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+#inventoryDisplay thead tr th {
+  padding: 10px;
+}
+
+#inventoryDisplay tbody tr, #inventoryDisplay tbody tr td {
+  border: 1px solid grey;
+  padding: 10px;
+}
+
+#inventoryDisplay tbody tr td a {
+  color: black;
+}
+
 @media only screen and (min-width: 475px) {
 
   nav ul {
