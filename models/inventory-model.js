@@ -124,4 +124,4 @@ async function updateInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailedView, addNavigationItem, checkExistingClassification, addInventoryItem, updateInventory } // checkExistingInventory
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailedView, addNavigationItem, checkExistingClassification, addInventoryItem, updateInventory }

@@ -1,6 +1,6 @@
 const utilities = require(".")
 // const utilities = require("../controllers/invController")
-const inventoryModel = require("../models/inventory-model")
+const invModel = require("../models/inventory-model")
 const { body, validationResult } = require("express-validator")
 const validate = {}
 
@@ -18,7 +18,7 @@ validate.addClassificationRules = () => {
       .isLength({ min: 1 })
       .withMessage("No spaces or special characters are allowed in the classification name.") // on error this message is sent.
       .custom(async (classification_name) => {
-        const classificationExists = await inventoryModel.checkExistingClassification(classification_name)
+        const classificationExists = await invModel.checkExistingClassification(classification_name)
         if (classificationExists){
           throw new Error("Classification exists.")
         }
@@ -181,9 +181,9 @@ validate.checkUpdateData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     let options = await utilities.buildOptions()
-    res.render("inventory/edit-inventory", {
+    res.render("inventory/add-inventory", {
       errors,
-      title: "Edit " + itemName,
+      title: "New Inventory",
       nav,
       options,
       inv_make,

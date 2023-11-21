@@ -1,17 +1,19 @@
 <h1><%= title %></h1>
+
 <%- messages() %>
+
 <% if (locals.errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
      <li><%= error.msg %></li>
   <%  }) %>
    </ul>
-  <% } %>
+<% } %>
 
-  <form action="/inv/update" method="post">
+<form action="/inv/update" method="post" id="updateForm">
     <div class="login">
         <label for="classification_id">Choose a classification:</label><br>
-        <%- classificationSelect %>
+        <%- locals.options %>
         <!-- <select name="classification_id" id="classification_id"></select> -->
     </div>
     <div class="login">
@@ -66,7 +68,7 @@
     </div>
 </form>
 
-<script>
+<script src="/js/inv-update.js">
     const imageInput = document.getElementById("inv_image");
     const thumbnailInput = document.getElementById("inv_thumbnail");
 
