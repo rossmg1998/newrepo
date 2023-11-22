@@ -183,7 +183,7 @@ validate.checkUpdateData = async (req, res, next) => {
     let options = await utilities.buildOptions()
     res.render("inventory/add-inventory", {
       errors,
-      title: "New Inventory",
+      title: "Edit " + itemName,
       nav,
       options,
       inv_make,

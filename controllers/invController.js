@@ -32,19 +32,19 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildDetailedView = async function (req, res, next) {
   try {
     const inv_id = req.params.inv_id
-    const data = await invModel.getDetailedView(inv_id)
-    const grid = await utilities.buildDetailedGrid(data)
+    const itemDetail = await invModel.getDetailedView(inv_id)
+    const grid = await utilities.buildDetailedGrid(itemDetail)
     let nav = await utilities.getNav()
 
-    const inv_make = data[0].inv_make
-    const inv_model = data[0].inv_model
-    // const inv_year = data[0].inv_year
-    console.log(data[0])
+    // const inv_make = itemDetail[0].inv_make
+    // const inv_model = itemDetail[0].inv_model
+    // const inv_year = itemDetail[0].inv_year
+    // console.log(itemDetail[0])
 
-    res.render("./inventory/classification", {
-      title: inv_make + ' ' + inv_model,
+    res.render("./inventory/vehicle-detail", {
+      title: `${itemDetail.inv_make} ${itemDetail.inv_model}`,
       nav,
-      grid,
+      itemDetail: grid,
       errors: null,
     })
 } catch (error) {

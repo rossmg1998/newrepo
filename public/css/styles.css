@@ -272,7 +272,6 @@ input:invalid:focus {
 
 .login textarea {
   width: 100%;
-  resize: none;
 }
 
 .management {

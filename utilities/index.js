@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
-
 const invModel = require("../models/inventory-model")
 const Util = {}
 
@@ -52,85 +51,63 @@ Util.buildOptions = async function (classification_id = null) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function (data) {
-  if (data.length === 0) {
-   return '<p class="notice">Sorry, no matching vehicles could be found.</p>';
-  }
-
-  const grid = data.map(vehicle => {
-   const {
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_thumbnail,
-    inv_price,
-   } = vehicle;
-
-   return `
-      <li>
-      <div class="vehicle">
-        <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
-          <img src="${inv_thumbnail}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
-        </a>
-        <div class="namePrice">
-          <hr />
-          <h2>
-            <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
-              ${inv_make} ${inv_model}
-            </a>
-          </h2>
-          <span>$${new Intl.NumberFormat('en-US').format(inv_price)}</span>
-        </div>
-      </div>
-      </li>
-    `;
-  });
-
-  return '<ul id="inv-display">' + grid.join('') + '</ul>';
+  let grid
+    if(data.length > 0){
+      grid = '<ul id="inv-display">'
+      data.forEach(vehicle => { 
+        grid += '<li>'
+        grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+        + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+        + 'details"><img src="' + vehicle.inv_thumbnail 
+        +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+        +' on CSE Motors" /></a>'
+        grid += '<div class="namePrice">'
+        grid += '<hr />'
+        grid += '<h2>'
+        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+        + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+        + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+        grid += '</h2>'
+        grid += '<span>$' 
+        + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+        grid += '</div>'
+        grid += '</li>'
+      })
+      grid += '</ul>'
+    } else { 
+      grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return grid
 };
-
 
 /* **************************************
 * Build the details view HTML
 * ************************************ */
-Util.buildDetailedGrid = async function (data) {
-  if (data.length === 0) {
-   return '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+Util.buildDetailedGrid = function (itemDetail) {
+  let detailGrid = '';
+
+  if (itemDetail) {
+    detailGrid += '<ul id="inv-display">';
+    detailGrid += '<li>';
+    detailGrid += '<div class="vehicle-content">';
+    detailGrid += '<div class="vehicle-image">';
+    detailGrid += `<img src="${itemDetail.inv_image}" alt="${itemDetail.inv_make} ${itemDetail.inv_model}" />`;
+    detailGrid += '</div>';
+    detailGrid += '<div class="vehicle-description">';
+    detailGrid += `<h2>${itemDetail.inv_make} ${itemDetail.inv_model} ${itemDetail.inv_year}</h2>`;
+    detailGrid += `<p><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(itemDetail.inv_price)}</p>`;
+    detailGrid += `<p><strong>Description:</strong> ${itemDetail.inv_description}</p>`;
+    detailGrid += `<p><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(itemDetail.inv_miles)}</p>`;
+    detailGrid += `<p><strong>Color:</strong> ${itemDetail.inv_color}</p>`;
+    detailGrid += '</div>';
+    detailGrid += '</div>';
+    detailGrid += '</li>';
+    detailGrid += '</ul>';
+  } else {
+    detailGrid += '<p class="notice">Sorry, the requested vehicle details could not be found.</p>';
   }
 
-  const grid = data.map(vehicle => {
-   const {
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_price,
-    inv_miles,
-    inv_color,
-   } = vehicle;
-
-   return `
-      <li>
-        <div class="vehicle-content">
-        <div class="vehicle-image">
-          <a href="../../inv/detail/${inv_id}" title="View ${inv_make} ${inv_model} details">
-            <img src="${inv_image}" alt="Image of ${inv_make} ${inv_model} on CSE Motors" />
-          </a>
-        </div>
-        <div class="vehicle-description">
-          <h2>${inv_make} ${inv_model} ${inv_year}</h2>
-          <p><b>Price: <span>$${new Intl.NumberFormat('en-US').format(inv_price)}</span></b></p>
-          <p><b>Description:</b> ${inv_description}</p>
-          <p><b>Color:</b> ${inv_color}</p>
-          <p><b>Miles:</b> <span>${new Intl.NumberFormat('en-US').format(inv_miles)}</span></p>
-        </div>
-        </div>
-      </li>
-    `;
-  });
-
-  return '<ul id="inv-display">' + grid.join('') + '</ul>';
+  return detailGrid;
 };
 
 /* ****************************************

@@ -41,10 +41,11 @@ async function getDetailedView(inv_id) {
       `SELECT * FROM public.inventory AS i 
       WHERE i.inv_id = $1`,
       [inv_id]
-    )
-    return data.rows
+    );
+    console.log(inv_id);
+    return data.rows[0];
   } catch (error) {
-    console.error("getInventoryItemDetail error " + error)
+    console.error("getInventoryItemDetail error " + error);
     throw error;
   }
 }
@@ -120,7 +121,7 @@ async function updateInventory(
     ])
     return data.rows[0]
   } catch (error) {
-    console.error("model error: " + error)
+    return error.message
   }
 }
 
