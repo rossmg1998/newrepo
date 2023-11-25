@@ -1,0 +1,55 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<% if (locals.errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+<% } %>
+
+<form action="/inv/delete" method="post" id="deleteForm">
+    <div class="login">
+        <p>Confirm Deletion - The delete is permanent.</p>
+        <!-- <label for="classification_id">Choose a classification:</label><br> -->
+        <!-- <%- locals.options %> -->
+    </div>
+    <div class="login">
+        <label for="inv_make">Make:</label><br>
+        <input type="text" id="inv_make" name="inv_make" required 
+        value="<%= locals.inv_make %>" pattern="^[a-zA-Z0-9]+$" readonly><br>
+    </div>
+    <div class="login">
+        <label for="inv_model">Model:</label><br>
+        <input type="text" id="inv_model" name="inv_model" required 
+        value="<%= locals.inv_model %>" pattern="^[a-zA-Z0-9]+$" readonly><br>
+    </div>
+    <div class="login">
+        <label for="inv_year">Year:</label><br>
+        <input type="number" id="inv_year" name="inv_year" required 
+        value="<%= locals.inv_year %>" placeholder="Enter a 4-digit year" readonly><br>
+    </div>
+    <div class="login">
+        <label for="inv_price">Price:</label><br>
+        <input type="number" id="inv_price" name="inv_price" required 
+        value="<%= locals.inv_price %>" placeholder="Decimal or number" readonly><br>
+    </div>
+    <div class="button">
+        <button type="submit">Delete Vehicle</button>
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </div>
+</form>
+
+<script>
+    const imageInput = document.getElementById("inv_image");
+    const thumbnailInput = document.getElementById("inv_thumbnail");
+
+    imageInput.value = "/images/vehicles/no-image.png";
+    thumbnailInput.value = "/images/vehicles/no-image.png";
+</script>
+
+<script src="/js/inv-update.js"></script>
