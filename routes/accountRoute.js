@@ -6,7 +6,7 @@ const accountController = require("../controllers/accountController")
 const Utilities = require("../utilities/index")
 
 // Route to account management view
-router.get("/", Utilities.checkLogin, Utilities.handleErrors(accountController.buildAccount));
+router.get("/", Utilities.handleErrors(accountController.buildAccount));
 
 // Route to My Account link
 router.get("/login", Utilities.handleErrors(accountController.buildLogin));

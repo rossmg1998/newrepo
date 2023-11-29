@@ -145,7 +145,25 @@ Util.checkJWTToken = (req, res, next) => {
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    next()
+
+    if (req.cookies.jwt) {
+        jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => { // replace secretKey with your actual secret key
+            if (err) {
+                req.flash("notice", "Invalid token.");
+                return res.redirect("/account/login");
+            } else {
+                if (decoded.account_type === 'Employee' || decoded.account_type === 'Admin') {
+                    next();
+                } else {
+                    req.flash("notice", "You do not have permission to access the inventory management page.");
+                    return res.redirect("/account/");
+                }
+            }
+        });
+    } else {
+        req.flash("notice", "No token provided.");
+        return res.redirect("/account/login");
+    }
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")

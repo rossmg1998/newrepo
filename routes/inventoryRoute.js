@@ -6,13 +6,13 @@ const Utilities = require("../utilities/index")
 const invValidate = require("../utilities/inventory-validation")
 
 // Route to management view
-router.get("/", Utilities.handleErrors(invController.buildManagement));
+router.get("/", Utilities.checkLogin, Utilities.handleErrors(invController.buildManagement));
 
 // Route to add classification view
-router.get("/add-classification", Utilities.handleErrors(invController.buildAddClassification));
+router.get("/add-classification", Utilities.checkLogin, Utilities.handleErrors(invController.buildAddClassification));
 
 // Route to add inventory view
-router.get("/add-inventory", Utilities.handleErrors(invController.buildAddInventory));
+router.get("/add-inventory", Utilities.checkLogin, Utilities.handleErrors(invController.buildAddInventory));
 
 // Process the classification data
 router.post(
