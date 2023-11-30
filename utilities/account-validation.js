@@ -121,5 +121,29 @@ validate.checkLogData = async (req, res, next) => {
   }
   next()
 }
-  
+ 
+validate.checkUpdateData = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email, old_account_email } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/update-account", {
+      errors,
+      title: "Update Account",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+    })
+    return
+  } else {
+    if (old_account_email !== account_email) {
+      // User changed their email address
+      await accountModel.checkExistingEmail(account_email)
+    }
+  }
+  next()
+}
+
 module.exports = validate

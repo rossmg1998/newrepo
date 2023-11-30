@@ -33,4 +33,23 @@ router.post(
     // }
 )
 
+// Route to update account view
+router.get("/update-account/:account_id", Utilities.handleErrors(accountController.buildUpdateAccount));
+
+// Process the update account data
+router.post(
+    "/update-account",
+    regValidate.registrationRules(),
+    regValidate.checkUpdateData,
+    Utilities.handleErrors(accountController.updateAccount)
+)
+
+// Process the password change
+// router.post(
+//     "/update-account-password",
+//     regValidate.changePasswordRules(),
+//     regValidate.checkPasswordData,
+//     Utilities.handleErrors(accountController.updatePassword)
+// )
+
 module.exports = router;

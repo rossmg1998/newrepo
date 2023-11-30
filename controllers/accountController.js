@@ -117,4 +117,48 @@ async function accountLogin(req, res) {
   }
  }
 
-module.exports = { buildLogin, buildRegister, registerAccount, buildAccount, accountLogin }
+/* *******************************
+*  Build update account view
+* ****************************** */
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/update-account", {
+    title: "Update Account",
+    nav,
+    errors: null,
+  })
+}
+
+/* *******************************
+*  Process update account data
+* ****************************** */
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body;
+
+  const accountResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (accountResult) {
+    req.flash(
+      "notice",
+      `Congratulations, your account has been updated.`
+    )
+    res.status(201).render("account/account", {
+      title: "Account",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/update-account", {
+      title: "Update Account",
+      nav,
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, buildAccount, accountLogin, buildUpdateAccount, updateAccount }
