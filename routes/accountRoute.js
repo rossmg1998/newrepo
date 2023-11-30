@@ -39,8 +39,8 @@ router.get("/update-account/:account_id", Utilities.handleErrors(accountControll
 // Process the update account data
 router.post(
     "/update-account",
-    regValidate.registrationRules(),
-    regValidate.checkUpdateData,
+    // regValidate.registrationRules(),
+    // regValidate.checkUpdateData,
     Utilities.handleErrors(accountController.updateAccount)
 )
 

@@ -134,30 +134,54 @@ async function buildUpdateAccount(req, res, next) {
 * ****************************** */
 async function updateAccount(req, res) {
   let nav = await utilities.getNav()
-  const { account_firstname, account_lastname, account_email, account_id } = req.body;
+  const { account_firstname, account_lastname, account_email } = req.body;
+  const account_id = res.locals.accountData.account_id
+  console.log(account_id)
+  const accountResult = await accountModel.getAccountById(account_id)
+  console.log(accountResult)
 
-  const accountResult = await accountModel.updateAccount(
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_id
-  )
+  if (!accountResult) {
+   req.flash("notice", "Please check your credentials and try again.")
+   res.status(400).render("account/account", {
+    title: "Account",
+    nav,
+    errors: null,
+   })
+  return
+  }
+  try {
+    if (accountResult) {
+      await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
 
-  if (accountResult) {
-    req.flash(
-      "notice",
-      `Congratulations, your account has been updated.`
-    )
-    res.status(201).render("account/account", {
-      title: "Account",
-      nav,
-    })
-  } else {
-    req.flash("notice", "Sorry, the update failed.")
-    res.status(501).render("account/update-account", {
-      title: "Update Account",
-      nav,
-    })
+      res.clearCookie("jwt")
+      const accessToken = jwt.sign({
+        account_id: accountData.account_id,
+        account_firstname: account_firstname,
+        account_lastname: account_lastname,
+        account_email: account_email,
+        account_type: accountData.account_type,
+      },
+        process.env.ACCESS_TOKEN_SECRET, 
+        { expiresIn: 3600 * 1000 })
+      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+
+      req.flash(
+        "notice",
+        `Congratulations, your account has been updated.`
+      )
+      res.status(201).render("account/account", {
+        title: "Account",
+        nav,
+      })
+    } else {
+      req.flash("notice", "Sorry, the update failed.")
+      res.status(501).render("account/update-account", {
+        title: "Update Account",
+        nav,
+      })
+    }
+  } catch (error) {
+   return new Error('There was an error updating your account.')
   }
 }
 
