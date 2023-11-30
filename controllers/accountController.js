@@ -135,8 +135,10 @@ async function buildUpdateAccount(req, res, next) {
 async function updateAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email } = req.body;
+
   const account_id = res.locals.accountData.account_id
   console.log(account_id)
+
   const accountResult = await accountModel.getAccountById(account_id)
   console.log(accountResult)
 
@@ -151,28 +153,14 @@ async function updateAccount(req, res) {
   }
   try {
     if (accountResult) {
-      await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
-
-      res.clearCookie("jwt")
-      const accessToken = jwt.sign({
-        account_id: accountData.account_id,
-        account_firstname: account_firstname,
-        account_lastname: account_lastname,
-        account_email: account_email,
-        account_type: accountData.account_type,
-      },
-        process.env.ACCESS_TOKEN_SECRET, 
-        { expiresIn: 3600 * 1000 })
-      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+       const accountResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
+       console.log(accountResult)
 
       req.flash(
         "notice",
         `Congratulations, your account has been updated.`
       )
-      res.status(201).render("account/account", {
-        title: "Account",
-        nav,
-      })
+      res.redirect("/account/")
     } else {
       req.flash("notice", "Sorry, the update failed.")
       res.status(501).render("account/update-account", {
@@ -185,4 +173,56 @@ async function updateAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, buildAccount, accountLogin, buildUpdateAccount, updateAccount }
+/* *******************************
+*  Process change password data
+* ****************************** */
+async function changePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_password } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the password change.')
+    res.status(500).render("account/update-account", {
+      title: "Update Account",
+      nav,
+      errors: null,
+    })
+  }
+
+  const changeResult = await accountModel.updatePassword(
+    hashedPassword
+  )
+
+  if (changeResult) {
+    req.flash(
+      "notice",
+      `Congratulations, your password has been updated. Please log in.`
+    )
+    res.status(201).render("account/account", {
+      title: "Account",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, the password change failed.")
+    res.status(501).render("account/update-account", {
+      title: "Update Account",
+      nav,
+    })
+  }
+}
+
+/* ******************
+*  Process logout
+* **************** */
+async function logout(req, res) {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  res.status(200).redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, buildAccount, accountLogin, buildUpdateAccount, updateAccount, changePassword, logout }

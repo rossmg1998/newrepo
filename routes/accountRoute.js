@@ -39,17 +39,23 @@ router.get("/update-account/:account_id", Utilities.handleErrors(accountControll
 // Process the update account data
 router.post(
     "/update-account",
-    // regValidate.registrationRules(),
-    // regValidate.checkUpdateData,
+    regValidate.updateRules(),
+    regValidate.checkUpdateData,
     Utilities.handleErrors(accountController.updateAccount)
 )
 
 // Process the password change
-// router.post(
-//     "/update-account-password",
-//     regValidate.changePasswordRules(),
-//     regValidate.checkPasswordData,
-//     Utilities.handleErrors(accountController.updatePassword)
-// )
+router.post(
+    "/update-account",
+    // regValidate.changePasswordRules(),
+    // regValidate.checkPasswordData,
+    Utilities.handleErrors(accountController.changePassword)
+)
+
+// Process logout
+router.post(
+    "/logout", 
+    Utilities.handleErrors(accountController.logout)
+)
 
 module.exports = router;
