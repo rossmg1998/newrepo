@@ -180,9 +180,14 @@ async function changePassword(req, res) {
   let nav = await utilities.getNav()
   const { account_password } = req.body
 
+  const account_id = res.locals.accountData.account_id
+
   // Hash the password before storing
   let hashedPassword
   try {
+    // Set the updated password in accountData
+    res.locals.accountData.account_password = account_password
+
     // regular password and cost (salt is generated automatically)
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
@@ -195,7 +200,8 @@ async function changePassword(req, res) {
   }
 
   const changeResult = await accountModel.updatePassword(
-    hashedPassword
+    hashedPassword,
+    account_id
   )
 
   if (changeResult) {
@@ -221,7 +227,7 @@ async function changePassword(req, res) {
 * **************** */
 async function logout(req, res) {
   res.clearCookie("jwt")
-  req.flash("notice", "You have been logged out.")
+  // req.flash("notice", "You have been logged out.")
   res.status(200).redirect("/")
 }
 

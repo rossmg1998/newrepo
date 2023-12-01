@@ -6,7 +6,7 @@ const accountController = require("../controllers/accountController")
 const Utilities = require("../utilities/index")
 
 // Route to account management view
-router.get("/", Utilities.handleErrors(accountController.buildAccount));
+router.get("/", Utilities.handleErrors(accountController.buildAccount)); // Utilities.checkLogin,
 
 // Route to My Account link
 router.get("/login", Utilities.handleErrors(accountController.buildLogin));
@@ -38,7 +38,7 @@ router.get("/update-account/:account_id", Utilities.handleErrors(accountControll
 
 // Process the update account data
 router.post(
-    "/update-account",
+    "/update-account/accountUpdate",
     regValidate.updateRules(),
     regValidate.checkUpdateData,
     Utilities.handleErrors(accountController.updateAccount)
@@ -46,14 +46,14 @@ router.post(
 
 // Process the password change
 router.post(
-    "/update-account",
-    // regValidate.changePasswordRules(),
-    // regValidate.checkPasswordData,
+    "/update-account/accountPassword",
+    regValidate.changePasswordRules(),
+    regValidate.checkPasswordData,
     Utilities.handleErrors(accountController.changePassword)
 )
 
-// Process logout
-router.post(
+// Route to logout
+router.get(
     "/logout", 
     Utilities.handleErrors(accountController.logout)
 )

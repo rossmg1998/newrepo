@@ -11,7 +11,7 @@
   <% } %>
 
 <div class="form-container">
-    <form action="/account/update-account" method="post">
+    <form action="/account/update-account/accountUpdate" method="post">
         <div class="login">
             <label for="account_firstname">First Name</label><br>
             <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.accountData.account_firstname %>"><br>
@@ -38,7 +38,7 @@
 </div>
 
 <div class="form-container">
-    <form action="/account/update-account" method="post">
+    <form action="/account/update-account/accountPassword" method="post">
         <div class="login">
             <label for="account_password">Change Password</label><br>
             <span>By entering a password it will change your current password.</span>
