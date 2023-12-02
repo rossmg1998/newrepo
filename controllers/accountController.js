@@ -155,6 +155,8 @@ async function updateAccount(req, res) {
     if (accountResult) {
        const accountResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
        console.log(accountResult)
+       const accessToken = jwt.sign(accountResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
 
       req.flash(
         "notice",
